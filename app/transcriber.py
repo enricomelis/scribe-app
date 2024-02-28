@@ -10,7 +10,7 @@ def find_file_path(start_directory, file_extension):
 
 
 start_directory = '/Users/enricomelis/Documents/1 Projects/scribe-app'  
-file_extension = '.mp3'  
+file_extension = '.m4a'  
 file_path = find_file_path(start_directory, file_extension)
 
 if file_path:
@@ -22,3 +22,6 @@ model = whisper.load_model("base")
 result = model.transcribe(file_path, fp16=False) 
 transribed_text = result["text"]
 print(transribed_text)
+
+
+
