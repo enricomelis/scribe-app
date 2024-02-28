@@ -9,19 +9,30 @@ def find_file_path(start_directory, file_extension):
     return None 
 
 
-start_directory = '/Users/enricomelis/Documents/1 Projects/scribe-app'  
-file_extension = '.m4a'  
-file_path = find_file_path(start_directory, file_extension)
+import whisper
 
-if file_path:
-    print(f'Found file at {file_path}')
-else:
-    print('File not found.')
+def transcribe_audio(filename):
+    """
+    Transcribes the audio content of a given file.
+    
+    :param filename: The full path to the audio file to be transcribed.
+    :return: The transcribed text from the audio file.
+    """
+    try:
+        with open(filename, 'rb') as f:
+            print(f'Found file at {filename}')
+    except FileNotFoundError:
+        print('File not found.')
+        return
+    
+    model = whisper.load_model("medium")
+    
+    result = model.transcribe(filename, fp16=False) 
+    transcribed_text = result["text"]
+    print(transcribed_text)
+    
+    return transcribed_text
 
-model = whisper.load_model("base")
-result = model.transcribe(file_path, fp16=False) 
-transribed_text = result["text"]
-print(transribed_text)
 
 
 
