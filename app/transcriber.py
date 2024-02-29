@@ -12,12 +12,6 @@ def find_file_path(start_directory, file_extension):
 import whisper
 
 def transcribe_audio(filename):
-    """
-    Transcribes the audio content of a given file.
-    
-    :param filename: The full path to the audio file to be transcribed.
-    :return: The transcribed text from the audio file.
-    """
     try:
         with open(filename, 'rb') as f:
             print(f'Found file at {filename}')
@@ -26,10 +20,8 @@ def transcribe_audio(filename):
         return
     
     model = whisper.load_model("medium")
-    
     result = model.transcribe(filename, fp16=False) 
     transcribed_text = result["text"]
-    print(transcribed_text)
     
     return transcribed_text
 
